@@ -2,6 +2,19 @@
 
 module Tianguis
   class Price
-    attr_reader :product, :date, :unit, :cost_cent, :currency
+    attr_accessor :product, :unit, :cost_cent, :currency
+    attr_reader :date
+
+    def date=(value)
+      @date = Date.parse(value)
+    end
+
+    def year
+      date.year
+    end
+
+    def week
+      date.cweek
+    end
   end
 end

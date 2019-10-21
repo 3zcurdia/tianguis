@@ -2,6 +2,6 @@
 
 module Tianguis
   class Market
-    attr_reader :name, :code, :state
+    attr_accessor :name, :code, :state
   end
 end
