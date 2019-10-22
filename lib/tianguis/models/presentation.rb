@@ -8,6 +8,10 @@ module Tianguis
       @quantity, @unit = parse(value)
     end
 
+    def to_h
+      {quantity: quantity, unit: unit}
+    end
+
     private
 
     def parse(value)

@@ -13,9 +13,14 @@ module Tianguis
     private
 
     def fetch_list
-      opts = page.css('#ddlDestinoInfEsp option')
-      opts.shift
-      opts.map(&Market.method(:parse))
+      table = page.css('#ddlDestinoInfEsp option')
+      table.shift
+      table.map do |row|
+        Market.new do |market|
+          market.id = item.attributes['value']&.value&.to_i || -1
+          market.state, market.name = item.text&.split(': ')
+        end
+      end
     end
   end
 end

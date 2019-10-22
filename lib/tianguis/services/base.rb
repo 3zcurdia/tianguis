@@ -2,27 +2,24 @@
 
 module Tianguis
   class BaseService
+    attr_reader :conn, :params
     BASE_URL = 'http://www.economia-sniim.gob.mx'
 
-    def initialize(**params)
-      @conn = Faraday.new(url: BASE_URL)
-      @params = params
+    def initialize(**args)
+      @conn   = Faraday.new(url: BASE_URL)
+      @params = args.compact
     end
 
-    def get(options = {})
-      conn.get(path, params.merge(options))
+    def request
+      conn.get(path, params)
     end
 
     def page
-      @page ||= Nokogiri::HTML(get.body)
+      @page ||= Nokogiri::HTML(request.body)
     end
 
     def path
       raise 'Path has not beed implemented'
     end
-
-    private
-
-    attr_reader :conn, :params
   end
 end
