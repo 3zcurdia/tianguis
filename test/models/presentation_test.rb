@@ -4,13 +4,13 @@ require 'test_helper'
 
 module Tianguis
   class PresentationTest < Minitest::Test
-    def test_parse_raw
+    def test_parse_raw_kg
       presentation = Tianguis::Presentation.new('caja de 23 kg')
       assert_equal 23, presentation.quantity
       assert_equal :kg, presentation.unit
     end
 
-    def test_parse_raw
+    def test_parse_raw_pc
       presentation = Tianguis::Presentation.new('caja de 23 piezas')
       assert_equal 23, presentation.quantity
       assert_equal :pc, presentation.unit

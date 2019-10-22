@@ -17,8 +17,8 @@ module Tianguis
       table.shift
       table.map do |row|
         Market.new do |market|
-          market.id = item.attributes['value']&.value&.to_i || -1
-          market.state, market.name = item.text&.split(': ')
+          market.id = row.attributes['value']&.value&.to_i || -1
+          market.state, market.name = row.text&.split(': ')
         end
       end
     end

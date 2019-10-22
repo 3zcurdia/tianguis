@@ -9,7 +9,7 @@ module Tianguis
     end
 
     def to_h
-      {quantity: quantity, unit: unit}
+      { quantity: quantity, unit: unit }
     end
 
     private
