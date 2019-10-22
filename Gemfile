@@ -2,5 +2,9 @@
 
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in tianguis.gemspec
 gemspec
+
+group :development do
+  gem 'pry'
+  gem 'awesome_print'
+end
