@@ -10,7 +10,7 @@ module Tianguis
     end
 
     def test_parse_price_table_product
-      VCR.use_cassette("fruits_weekly_summary_service") do
+      VCR.use_cassette('fruits_weekly_summary_service') do
         assert_equal 71, service.price_table.count
         assert_equal 'Aguacate Hass', service.price_table.first[:product].name
         assert_equal 'Michoacán', service.price_table.first[:product].state
@@ -21,8 +21,8 @@ module Tianguis
     end
 
     def test_parse_price_table_prices
-      VCR.use_cassette("fruits_weekly_summary_service") do
-        assert_equal Date.new(2019,1,31), service.price_table.first[:prices].first[:date]
+      VCR.use_cassette('fruits_weekly_summary_service') do
+        assert_equal Date.new(2019, 1, 31), service.price_table.first[:prices].first[:date]
         assert_equal [340.0, 0.0, 320.0, 320.0, 320.0], service.price_table.first[:prices].map { |x| x[:value] }
         assert_equal [70.0, 0.0, 70.0, 70.0, 70.0], service.price_table.last[:prices].map { |x| x[:value] }
       end
