@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Tianguis
-  class WeeklySummaryService < BaseService
+  class FruitsWeeklySummary < SummaryService
     def initialize(year: Time.now.year, month: Time.now.month, week: 1, market_id: 100)
       super(Anio: year, Mes: month, Semana: week, DestinoId: market_id)
     end
@@ -15,9 +15,7 @@ module Tianguis
 
       category = nil
       @price_table = []
-      table = page.css('#tblResultados tr')
-      table.shift
-      table.each do |row|
+      table do |row|
         if row.css('.encabTIP2').any?
           category = row.text.strip
           next
@@ -59,12 +57,8 @@ module Tianguis
     end
 
     def date(day)
-      day = header(day)&.split('/')&.first&.to_i
+      day = table_header(day)&.split('/')&.first&.to_i
       Date.new(params[:Anio], params[:Mes], day)
-    end
-
-    def header(col)
-      page.xpath("//*[@id='tblResultados']/tr[1]/td[#{col}]").children.first&.text
     end
   end
 end

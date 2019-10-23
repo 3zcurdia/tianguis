@@ -19,7 +19,7 @@ module Tianguis
     end
 
     def path
-      raise 'Path has not beed implemented'
+      raise 'Path has not been implemented'
     end
   end
 end

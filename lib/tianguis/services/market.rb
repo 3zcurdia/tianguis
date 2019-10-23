@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 module Tianguis
-  class MarketService < BaseService
+  class Market < BaseService
+    def self.all
+      new.list
+    end
+
     def path
       '/nuevo/Consultas/MercadosNacionales/PreciosDeMercado/Agricolas/ConsultaFrutasYHortalizas.aspx'
     end
@@ -16,10 +20,12 @@ module Tianguis
       table = page.css('#ddlDestinoInfEsp option')
       table.shift
       table.map do |row|
-        Market.new do |market|
-          market.id = row.attributes['value']&.value&.to_i || -1
-          market.state, market.name = row.text&.split(': ')
-        end
+        state, name = row.text&.split(': ')
+        {
+          id: row.attributes['value']&.value&.to_i,
+          state: state,
+          name: name
+        }
       end
     end
   end
