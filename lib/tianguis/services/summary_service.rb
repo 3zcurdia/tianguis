@@ -9,9 +9,7 @@ module Tianguis
     def table
       table = page.css('#tblResultados tr')
       table.shift
-      table.each do |row|
-        yield(row)
-      end
+      table
     end
   end
 end

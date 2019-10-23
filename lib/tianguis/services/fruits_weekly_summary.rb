@@ -15,7 +15,7 @@ module Tianguis
 
       category = nil
       @price_table = []
-      table do |row|
+      table.each do |row|
         if row.css('.encabTIP2').any?
           category = row.text.strip
           next
