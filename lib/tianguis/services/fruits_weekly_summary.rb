@@ -17,11 +17,10 @@ module Tianguis
       @price_table = []
       table.each do |row|
         if row.css('.encabTIP2').any?
-          category = row.text.strip
+          category = row.text.strip.downcase
           next
         end
-        product = create_product(row, category)
-        @price_table << { product: product, prices: create_prices(row), avg_price: avg_price(row) }
+        @price_table << TableRow.new(create_product(row, category), create_prices(row), avg_price(row))
       end
       @price_table
     end
@@ -34,21 +33,23 @@ module Tianguis
 
     def create_product(item, category)
       Product.new do |product|
-        product.type = :agricultural
-        product.category = category
+        product.category = :agricultural
+        product.type = category
         product.name = item.xpath('td[1]').text.strip
-        product.quality = item.xpath('td[2]').text.strip
-        product.presentation = Presentation.new(item.xpath('td[3]').text.strip)
-        product.state = item.xpath('td[4]').text
-      end
+        product.quality = item.xpath('td[2]').text
+        product.variant = item.xpath('td[3]').text
+        product.state = item.xpath('td[4]').text.strip
+      end.to_h
     end
 
     def create_prices(item)
       (5..9).map do |day|
-        next if item.xpath("td[#{day}]").text == '-'
+        price = item.xpath("td[#{day}]").text.to_f
+        next if price.zero?
+
         {
           date: date(day),
-          value: item.xpath("td[#{day}]").text.to_f
+          value: price
         }
       end.compact
     end

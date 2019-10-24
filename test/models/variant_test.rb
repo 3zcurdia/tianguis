@@ -3,45 +3,45 @@
 require 'test_helper'
 
 module Tianguis
-  class PresentationTest < Minitest::Test
+  class VariantTest < Minitest::Test
     def test_parse_raw_kg
-      presentation = Tianguis::Presentation.new('caja de 23 kg')
+      presentation = Tianguis::Variant.new('caja de 23 kg')
       assert_equal 23, presentation.quantity
       assert_equal :kg, presentation.unit
     end
 
     def test_parse_raw_pc
-      presentation = Tianguis::Presentation.new('caja de 23 piezas')
+      presentation = Tianguis::Variant.new('caja de 23 piezas')
       assert_equal 23, presentation.quantity
       assert_equal :pc, presentation.unit
     end
 
     def test_parse_kg
-      presentation = Tianguis::Presentation.new('Kilogramo')
+      presentation = Tianguis::Variant.new('Kilogramo')
       assert_equal 1, presentation.quantity
       assert_equal :kg, presentation.unit
     end
 
     def test_parse_kg_humanized
-      presentation = Tianguis::Presentation.new('Por Kilogramo')
+      presentation = Tianguis::Variant.new('Por Kilogramo')
       assert_equal 1, presentation.quantity
       assert_equal :kg, presentation.unit
     end
 
     def test_parse_dozen
-      presentation = Tianguis::Presentation.new('Docena')
+      presentation = Tianguis::Variant.new('Docena')
       assert_equal 12, presentation.quantity
       assert_equal :pc, presentation.unit
     end
 
     def test_parse_piece
-      presentation = Tianguis::Presentation.new('Pieza')
+      presentation = Tianguis::Variant.new('Pieza')
       assert_equal 1, presentation.quantity
       assert_equal :pc, presentation.unit
     end
 
     def test_parse_piece_humanized
-      presentation = Tianguis::Presentation.new('Por Pieza')
+      presentation = Tianguis::Variant.new('Por Pieza')
       assert_equal 1, presentation.quantity
       assert_equal :pc, presentation.unit
     end

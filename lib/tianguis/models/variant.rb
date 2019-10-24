@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 module Tianguis
-  class Presentation
-    attr_reader :value, :quantity, :unit
-    def initialize(value)
-      @value = value
-      @quantity, @unit = parse(value)
+  class Variant
+    attr_reader :name, :quantity, :unit
+
+    def initialize(name)
+      @name = name.strip.sub('.', '')
+      @quantity, @unit = parse(name)
     end
 
     def to_h
-      { quantity: quantity, unit: unit }
+      { name: name, quantity: quantity, unit: unit }
     end
 
     private
