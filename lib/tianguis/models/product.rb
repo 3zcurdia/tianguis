@@ -31,11 +31,13 @@ module Tianguis
     def parse_quality(value)
       case value.downcase
       when /primera/
-        :first
+        1
       when /segunda/
-        :second
+        2
+      else /tercera/
+        3
       else
-        :third
+        0
       end
     end
   end
