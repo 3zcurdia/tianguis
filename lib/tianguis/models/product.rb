@@ -2,7 +2,7 @@
 
 module Tianguis
   class Product
-    attr_accessor :type, :name, :state, :category
+    attr_accessor :name, :state, :category, :kind
     attr_reader :quality, :variant
 
     def initialize
@@ -11,12 +11,12 @@ module Tianguis
 
     def to_h
       {
-        type: type,
         name: name,
         quality: quality,
         variant: variant.to_h,
         state: state,
-        category: category
+        category: category,
+        kind: kind
       }
     end
 

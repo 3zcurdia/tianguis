@@ -20,7 +20,7 @@ module Tianguis
         product = service.price_table.first.product
         assert_equal 'Aguacate Hass', product[:name]
         assert_equal 'Michoacán', product[:state]
-        assert_equal :first, product[:quality]
+        assert_equal 1, product[:quality]
       end
     end
 
@@ -29,7 +29,7 @@ module Tianguis
         product = service.price_table.last.product
         assert_equal 'Chile Pasilla', product[:name]
         assert_equal 'Zacatecas', product[:state]
-        assert_equal :first, product[:quality]
+        assert_equal 1, product[:quality]
       end
     end
 

@@ -31,10 +31,10 @@ module Tianguis
 
     private
 
-    def create_product(item, category)
+    def create_product(item, kind)
       Product.new do |product|
         product.category = :agricultural
-        product.type = category
+        product.kind = kind
         product.name = item.xpath('td[1]').text.strip
         product.quality = item.xpath('td[2]').text
         product.variant = item.xpath('td[3]').text
