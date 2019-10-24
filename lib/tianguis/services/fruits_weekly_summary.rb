@@ -45,11 +45,12 @@ module Tianguis
 
     def create_prices(item)
       (5..9).map do |day|
+        next if item.xpath("td[#{day}]").text == '-'
         {
           date: date(day),
           value: item.xpath("td[#{day}]").text.to_f
         }
-      end
+      end.compact
     end
 
     def avg_price(item)
