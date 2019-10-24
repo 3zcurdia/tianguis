@@ -64,8 +64,36 @@ module Tianguis
     end
 
     def date(day)
-      day = table_header(day)&.split('/')&.first&.to_i
-      Date.new(params[:Anio], params[:Mes], day)
+      day, month = table_header(day)&.split('/')
+      month = months[month.downcase.to_sym]
+      Date.new(current_year(month), month, day.to_i)
+    end
+
+    def current_year(month)
+      if month == 12 && params[:Mes] == 1
+        params[:Anio] - 1
+      elsif month == 1 && params[:Mes] == 12
+        params[:Anio] + 1
+      else
+        params[:Anio]
+      end
+    end
+
+    def months
+      @months ||= {
+        ene: 1,
+        feb: 2,
+        mar: 3,
+        abr: 4,
+        may: 5,
+        jun: 6,
+        jul: 7,
+        ago: 8,
+        sep: 9,
+        oct: 10,
+        nov: 11,
+        dic: 12
+      }.freeze
     end
   end
 end

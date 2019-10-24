@@ -36,16 +36,30 @@ module Tianguis
     def test_parse_first_price_table_prices
       VCR.use_cassette('fruits_weekly_summary_service') do
         prices = service.price_table.first.prices
-        assert_equal(Date.new(2019, 1, 31), prices.first[:published_at])
         assert_equal([340_00, 320_00, 320_00, 320_00], prices.map { |x| x[:cost_cents] })
+      end
+    end
+
+    def test_parse_first_price_table_prices_dates
+      VCR.use_cassette('fruits_weekly_summary_service') do
+        prices = service.price_table.first.prices
+        assert_equal(Date.new(2018, 12, 31), prices.first[:published_at])
+        assert_equal(Date.new(2019, 1, 4), prices.last[:published_at])
       end
     end
 
     def test_parse_last_price_table_prices
       VCR.use_cassette('fruits_weekly_summary_service') do
         prices = service.price_table.last.prices
-        assert_equal(Date.new(2019, 1, 31), prices.first[:published_at])
         assert_equal([70_00, 70_00, 70_00, 70_00], prices.map { |x| x[:cost_cents] })
+      end
+    end
+
+    def test_parse_last_price_table_prices_dates
+      VCR.use_cassette('fruits_weekly_summary_service') do
+        prices = service.price_table.last.prices
+        assert_equal(Date.new(2018, 12, 31), prices.first[:published_at])
+        assert_equal(Date.new(2019, 1, 4), prices.last[:published_at])
       end
     end
   end
