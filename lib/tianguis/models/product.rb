@@ -34,7 +34,7 @@ module Tianguis
         1
       when /segunda/
         2
-      else /tercera/
+      when /tercera/
         3
       else
         0
