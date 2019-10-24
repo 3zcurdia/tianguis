@@ -23,8 +23,8 @@ module Tianguis
         state, name = row.text&.split(': ')
         {
           id: row.attributes['value']&.value&.to_i,
-          state: state,
-          name: name
+          state: state.strip,
+          name: name.strip
         }
       end
     end
