@@ -48,14 +48,19 @@ module Tianguis
         next if price.zero?
 
         {
-          date: date(day),
-          value: price
+          published_at: date(day),
+          cost_cents: (price * 100).to_i,
+          currency: 'MXN'
         }
       end.compact
     end
 
     def avg_price(item)
-      item.xpath('td[10]').text.to_f
+      {
+        cost_cents: (item.xpath('td[10]').text.to_f * 100).to_i,
+        currency: 'MXN',
+        unit: :kg
+      }
     end
 
     def date(day)

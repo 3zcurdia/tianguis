@@ -36,16 +36,16 @@ module Tianguis
     def test_parse_first_price_table_prices
       VCR.use_cassette('fruits_weekly_summary_service') do
         prices = service.price_table.first.prices
-        assert_equal(Date.new(2019, 1, 31), prices.first[:date])
-        assert_equal([340.0, 320.0, 320.0, 320.0], prices.map { |x| x[:value] })
+        assert_equal(Date.new(2019, 1, 31), prices.first[:published_at])
+        assert_equal([340_00, 320_00, 320_00, 320_00], prices.map { |x| x[:cost_cents] })
       end
     end
 
     def test_parse_last_price_table_prices
       VCR.use_cassette('fruits_weekly_summary_service') do
         prices = service.price_table.last.prices
-        assert_equal(Date.new(2019, 1, 31), prices.first[:date])
-        assert_equal([70.0, 70.0, 70.0, 70.0], prices.map { |x| x[:value] })
+        assert_equal(Date.new(2019, 1, 31), prices.first[:published_at])
+        assert_equal([70_00, 70_00, 70_00, 70_00], prices.map { |x| x[:cost_cents] })
       end
     end
   end
