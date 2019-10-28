@@ -21,8 +21,12 @@ module Tianguis
         [Regexp.last_match(1).to_i, :kg]
       when /.*\s+de\s+(\d+)\s.*/
         [Regexp.last_match(1).to_i, :pc]
+      when /tonelada/
+        [1000, :kg]
       when /kilogramo/
         [1, :kg]
+      when /ciento/
+        [100, :pc]
       when /docena/
         [12, :pc]
       else
