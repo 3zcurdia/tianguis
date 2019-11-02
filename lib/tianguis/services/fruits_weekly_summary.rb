@@ -2,7 +2,7 @@
 
 module Tianguis
   class FruitsWeeklySummary < SummaryService
-    def initialize(year: Time.now.year, month: Time.now.month, week: 1, market_id: 100)
+    def initialize(year: Time.now.year, month: 10, week: 1, market_id: 100)
       super(Anio: year, Mes: month, Semana: week, DestinoId: market_id)
     end
 
@@ -14,13 +14,21 @@ module Tianguis
       return @price_table if defined?(@price_table)
 
       category = nil
+      product = nil
       @price_table = []
       table.each do |row|
         if row.css('.encabTIP2').any?
           category = row.text.strip.downcase
           next
         end
-        @price_table << TableRow.new(create_product(row, category), create_prices(row), avg_price(row))
+        product = if row.xpath('td[1]').text.strip == '-'
+                    add_variant(row, product)
+                  else
+                    create_product(row, category)
+        end
+        next unless product
+
+        @price_table << TableRow.new(product.to_h, create_prices(row), avg_price(row))
       end
       @price_table
     end
@@ -31,15 +39,21 @@ module Tianguis
 
     private
 
-    def create_product(item, kind)
+    def create_product(row, kind)
       Product.new do |product|
         product.category = :agricultural
         product.kind = kind
-        product.name = item.xpath('td[1]').text.strip
-        product.quality = item.xpath('td[2]').text
-        product.variant = item.xpath('td[3]').text
-        product.state = item.xpath('td[4]').text.strip
-      end.to_h
+        product.name = row.xpath('td[1]').text.strip
+        product.quality = row.xpath('td[2]').text
+        product.variant = row.xpath('td[3]').text
+        product.state = row.xpath('td[4]').text.strip
+      end
+    end
+
+    def add_variant(row, product)
+      product.variant = row.xpath('td[3]').text
+      product.state = row.xpath('td[4]').text.strip
+      product
     end
 
     def create_prices(item)
