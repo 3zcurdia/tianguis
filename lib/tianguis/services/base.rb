@@ -14,8 +14,16 @@ module Tianguis
       conn.get(path, params)
     end
 
+    def url
+      BASE_URL + path
+    end
+
+    def body
+      @body ||= request.body
+    end
+
     def page
-      @page ||= Nokogiri::HTML(request.body)
+      @page ||= Nokogiri::HTML(body)
     end
 
     def path
