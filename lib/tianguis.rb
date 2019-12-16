@@ -2,6 +2,7 @@
 
 require 'tianguis/version'
 require 'tianguis/models'
+require 'tianguis/parsers'
 require 'tianguis/services'
 
 module Tianguis

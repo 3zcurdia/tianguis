@@ -21,14 +21,14 @@ module Tianguis
     end
 
     def quality=(value)
-      @quality = parse_quality(value)
+      @quality = calc_quality(value)
     end
 
     def variant=(value)
       @variant = Variant.new(value)
     end
 
-    def parse_quality(value)
+    def calc_quality(value)
       case value.downcase
       when /primera/
         1

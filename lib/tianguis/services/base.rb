@@ -2,12 +2,15 @@
 
 module Tianguis
   class BaseService
-    attr_reader :conn, :params
+    attr_reader :params
     BASE_URL = 'http://www.economia-sniim.gob.mx'
 
     def initialize(**args)
-      @conn   = Faraday.new(url: BASE_URL)
       @params = args.compact
+    end
+
+    def conn
+      @conn ||= Faraday.new(url: BASE_URL)
     end
 
     def request
@@ -22,8 +25,8 @@ module Tianguis
       @body ||= request.body
     end
 
-    def page
-      @page ||= Nokogiri::HTML(body)
+    def parser
+      raise 'Parser has not been implemented'
     end
 
     def path

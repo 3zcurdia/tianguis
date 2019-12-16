@@ -10,23 +10,12 @@ module Tianguis
       '/nuevo/Consultas/MercadosNacionales/PreciosDeMercado/Agricolas/ConsultaFrutasYHortalizas.aspx'
     end
 
-    def list
-      @list ||= fetch_list
+    def parser
+      @parser ||= Parser::Market.new(html: body)
     end
 
-    private
-
-    def fetch_list
-      table = page.css('#ddlDestinoInfEsp option')
-      table.shift
-      table.map do |row|
-        state, name = row.text&.split(': ')
-        {
-          id: row.attributes['value']&.value&.to_i,
-          state: state.strip,
-          name: name.strip
-        }
-      end
+    def list
+      @list ||= parser.list
     end
   end
 end
