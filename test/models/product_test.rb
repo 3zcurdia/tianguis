@@ -31,8 +31,9 @@ module Tianguis
     def test_variant_parse
       product = Tianguis::Product.new
       product.variant = 'caja de 9 kg'
-      assert_equal 9, product.variant.quantity
-      assert_equal :kg, product.variant.unit
+      variant = product.variant
+      assert_equal 9, variant.quantity
+      assert_equal :kg, variant.unit
     end
   end
 end

@@ -28,6 +28,8 @@ module Tianguis
       @variant = Variant.new(value)
     end
 
+    private
+
     def calc_quality(value)
       case value.downcase
       when /primera/

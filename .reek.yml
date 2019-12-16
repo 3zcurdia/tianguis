@@ -12,7 +12,6 @@ detectors:
     - Tianguis::Parser::FruitsWeekly#current_year
   DuplicateMethodCall:
     exclude:
-    - Tianguis::ProductTest#test_variant_parse
     - Tianguis::Variant#parse
   FeatureEnvy:
     exclude:
