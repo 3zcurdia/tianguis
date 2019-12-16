@@ -18,7 +18,7 @@ module Tianguis
             name: name.strip
           }
         end
-    end
+      end
     end
   end
 end

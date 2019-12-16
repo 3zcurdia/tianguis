@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'faraday'
-require 'nokogiri'
 require 'tianguis/summary'
 require 'tianguis/services/base'
 require 'tianguis/services/market'

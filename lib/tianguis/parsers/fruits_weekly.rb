@@ -27,7 +27,7 @@ module Tianguis
                       add_variant(row, product)
                     else
                       create_product(row, category)
-          end
+                    end
           next unless product
 
           @price_table << TableRow.new(product.to_h, create_prices(row), avg_price(row))
