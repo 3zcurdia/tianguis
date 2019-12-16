@@ -13,11 +13,9 @@ module Tianguis
       end
 
       def price_table
-        return @price_table if defined?(@price_table)
-
         category = nil
         product = nil
-        @price_table = []
+        price_table = []
         table.each do |row|
           if row.css('.encabTIP2').any?
             category = row.text.strip.downcase
@@ -30,13 +28,13 @@ module Tianguis
                     end
           next unless product
 
-          @price_table << TableRow.new(product.to_h, create_prices(row), avg_price(row))
+          price_table << TableRow.new(product.to_h, create_prices(row), avg_price(row))
         end
-        @price_table
+        price_table
       end
 
       def products
-        @products ||= price_table.map { |row| row[:product] }
+        products ||= price_table.map { |row| row[:product] }
       end
 
       private

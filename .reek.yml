@@ -23,9 +23,6 @@ detectors:
     - Tianguis::ProductTest#test_variant_parse
     - Tianguis::Parser::FruitsWeekly#create_prices
     - Tianguis::Parser::Market#list
-  InstanceVariableAssumption:
-    exclude:
-    - Tianguis::Parser::FruitsWeekly
   IrresponsibleModule:
     exclude:
     - Tianguis::ProductTest

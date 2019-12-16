@@ -15,11 +15,11 @@ module Tianguis
     end
 
     def price_table
-      parser.price_table
+      @price_table ||= parser.price_table
     end
 
     def products
-      @products ||= price_table.map { |row| row[:product] }
+      parser.products
     end
   end
 end
