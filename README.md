@@ -21,7 +21,26 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+
+### Fruits scrapper
+
+Setup scrapper
+
+```
+  scrapper = Tianguis::FruitsWeeklySummary.new(year: 2020, month: 1, week: 1)
+```
+
+Load products
+
+```
+  scrapper.products
+```
+
+Load price table
+
+```
+  scrapper.price_table
+```
 
 ## Development
 
